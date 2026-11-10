@@ -1,0 +1,44 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerMana : MonoBehaviour
+{
+    public int mana = 100;
+    public int manaCost = -10;
+
+    public TextMeshProUGUI manaText;
+
+    public Animator animator;
+
+    void Start()
+    {
+        UpdateManaUI();
+    }
+
+    void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            UseMana();
+        }
+    }
+
+    void UseMana()
+    {
+        if (mana >= manaCost)
+        {
+            mana -= manaCost;
+
+            UpdateManaUI();
+
+          
+            animator.SetTrigger("space");
+        }
+    }
+
+    void UpdateManaUI()
+    {
+        manaText.text = "Mana: " + mana;
+    }
+}
